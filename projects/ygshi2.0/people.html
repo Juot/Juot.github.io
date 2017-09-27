@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 这一条针对IE。使用IE最高版本渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!-- 载入基础css -->
+    <link rel="stylesheet" href="css/basic.css">
+    <link rel="stylesheet" href="css/people.css">
+    <!--[if IE 9]>
+    <link rel="stylesheet" href="css/basic-ie.css">
+    <link rel="stylesheet" href="css/people-ie.css">
+    <![endif]-->
+    <title>Yigong Shi Lab - People</title>
+</head>
+<body data-bind="css: {nooverflow: popupBoxStatus}">
+    <!--主页-->
+    <div class="container">
+        <!--正文部分-->
+        <section class="main-content">
+            <article class="card boss">
+                <div class="boss-info">
+                    <img id="boss-img" src="img/people/shiyigong.jpg" alt="Image of Yigong Shi">
+                    <h4 class="boss-name-english">Yigong Shi, Ph.D</h4>
+                    <h4 class="boss-name-chinese">施一公 教授</h4>
+                    <a id="boss-biography" href="CV_YigongShi.pdf" target="_blank">Biography</a>
+                </div>
+                <div class="boss-more">
+                    <p class="purple bold boss-contact-head entypo-globe">CONTACT</p>
+                    <ul class="boss-contact">
+                        <li class="boss-contact-item">University Professor</li>
+                        <li class="boss-contact-item">
+                            <a class="boss-contact-link" href="http://life.tsinghua.edu.cn" target="_blank">School of Life Sciences</a>
+                        </li>
+                        <li class="boss-contact-item">
+                            <a class="boss-contact-link" href="http://www.tsinghua.edu.cn" target="_blank">Tsinghua University</a>
+                        </li>
+                        <li class="boss-contact-item">Lab: 86(10)62797560</li>
+                        <li class="boss-contact-item">Asst.: 86(10)62781053</li>
+                    </ul>
+                    <p class="purple bold boss-contact-head entypo-users">ALUMNI</p>
+                    <ul class="boss-contact" data-bind="foreach: alumniList">
+                        <li class="boss-contact-item alumni" data-bind="text: name, click: $parent.updateCurrentAlumni"></li>
+                    </ul>
+                </div>
+            </article>
+            <div class="clearboth"></div>
+            <article class="card">
+                <h4 class="degree" >Group Photo 2015</h4>
+                <img src="img/people/shi_group2015.jpg" alt="Group photo 2015 of Shi Lab">
+            </article>
+            <!-- ko foreach: degreeArray -->
+            <article class="members card">
+                <h4 class="degree" data-bind="text: degree"></h4>
+                <ul class="member-list" data-bind="foreach: memberList">
+                    <li class="member-item">
+                        <img class="menber-img" alt="lab member" data-bind="attr: {src: imgSrc}">
+                        <p class="member-name-english bold purple" data-bind="text: nameEn"></p>
+                        <p class="member-name-chinese bold purple" data-bind="text: nameZh"></p>
+                    </li>
+                </ul>
+                <div class="clearboth"></div>
+            </article>
+            <!-- /ko -->
+        </section>
+        <div class="clearboth"></div>
+    </div>
+    <!-- 点击alumni弹出的对话框 -->
+    <div id="overlay" data-bind="css: {beneath: popupBoxStatus() === false }, click: hideAlumni"></div>
+    <div id="alumni-header" data-bind="css: {beneath: popupBoxStatus() === false }">
+        <a href="#" id="close-alumni" data-bind="click: hideAlumni">x</a>
+    </div>
+    <div id="alumni-box" data-bind="css: {beneath: popupBoxStatus() === false }, with: currentAlumni">
+        <h4 class="alumni-school" data-bind="text: name"></h4>
+        <ul id="alumni-body">
+            <li class="alumni-degree">
+                <h5 class="alumni-title" data-bind="text: masterOrUndergrad"></h5>
+                <ul class="alumni-member-list" data-bind="foreach: masters">
+                    <li class="alumni-name" data-bind="text: $data"></li>
+                </ul>
+            </li>
+            <li class="alumni-degree">
+                <h5 class="alumni-title">Ph.Ds</h5>
+                <ul class="alumni-member-list" data-bind="foreach: phds">
+                    <li class="alumni-name" data-bind="text: $data"></li>
+                </ul>
+            </li>
+            <li class="alumni-degree">
+                <h5 class="alumni-title">Post-docs</h5>
+                <ul class="alumni-member-list" data-bind="foreach: postDocs">
+                    <li class="alumni-name" data-bind="text: $data"></li>
+                </ul>
+            </li>
+            <li class="alumni-degree">
+                <h5 class="alumni-title">Technicians</h5>
+                <ul class="alumni-member-list" data-bind="foreach: technicians">
+                    <li class="alumni-name" data-bind="text: $data"></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="js/lib/jquery-3.1.0.min.js"></script>
+    <script src="js/lib/knockout-3.4.0.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/ko-people.js"></script>
+    <script src="js/basic.js"></script>
+</body>
+</html>
